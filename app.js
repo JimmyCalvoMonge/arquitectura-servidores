@@ -11,13 +11,13 @@ app.use(logger('dev'));
 app.use(express.json());
 
 /** Routes */
-const routes = require('./config/routes.config');
+const routes = require('./config/routes.config.js');
 app.use('/api', routes);
 
 /** Error Handling */
 
 app.use((req, res, next) => {
-  next(createError(404, 'Route not found'))
+  next(createError(404, 'Route not found.'))
 })
 
 app.use((error, req, res, next) => {
