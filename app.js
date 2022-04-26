@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const createError = require('http-errors');
+const bodyParser = require('body-parser');
 const express = require('express');
 const logger = require('morgan');
 
@@ -10,9 +11,13 @@ const app = express();
 app.use(logger('dev'));
 app.use(express.json());
 
+/* Para accesar el body de una POST request */
+app.use(bodyParser.urlencoded({ extended: true }));
+
 /** Routes */
 const routes = require('./config/routes.config.js');
 app.use('/api', routes);
+
 
 /** Error Handling */
 
@@ -47,3 +52,5 @@ const port = process.env.PORT || 8000;
 app.listen(port, () => {
   console.info(`Application running at port ${port}`)
 });
+
+module.exports = app;
