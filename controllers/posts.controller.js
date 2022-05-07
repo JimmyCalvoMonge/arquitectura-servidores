@@ -23,7 +23,7 @@ module.exports.detail = (req,res,next) =>{
 };
 
 module.exports.create = (req,res,next) =>{
-    const data = ({id, title, text} = req.body);
+    const data = ({author, title, text} = req.body);
     Post.create(data)
     .then(post => {
         res.status(201).json(post);
@@ -33,7 +33,7 @@ module.exports.create = (req,res,next) =>{
 
 module.exports.update = (req,res,next) =>{
 
-    const data = ({id, title, text} = req.body);
+    const data = ({author,title, text} = req.body);
     
     Post.findByIdAndUpdate(req.params.id, data, {new: true})
     .then((post)=>{

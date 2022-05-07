@@ -4,10 +4,9 @@ const mongoose = require("mongoose");
 const schema = new mongoose.Schema(
     
     {
-        id : {
+        author : {
             type: String,
             required: true,
-            unique : true,
         },
         title : {
             type: String,
@@ -18,15 +17,19 @@ const schema = new mongoose.Schema(
             type: String,
             required: true,
             match: /^.{5,}$/, //5 caracteres o más...
-        },
-        author : {
-            type: String,
-            required: true,
         }
     },
     
     {
-    timestamps: true, // createdAt & updatedAt
+        timestamps: true, // createdAt & updatedAt
+        toJSON : { // Esto lo agregamos viendo la clase 3
+            transform: (doc,ret)=>{
+                delete ret._v;
+                ret.id=ret._id;
+                delete ret._id;
+                return ret;
+            },
+        }
     },
       
 );
