@@ -4,10 +4,9 @@ const mongoose = require("mongoose");
 const schema = new mongoose.Schema(
     
     {
-        id : {
-            type: String,
-            required: true,
-            unique : true,
+        author : {
+            type: mongoose.Types.ObjectId,
+            ref: "User",
         },
         title : {
             type: String,
@@ -19,10 +18,6 @@ const schema = new mongoose.Schema(
             required: true,
             match: /^.{5,}$/, //5 caracteres o más...
         },
-        author : {
-            type: String,
-            required: true,
-        }
     },
     
     {

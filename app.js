@@ -3,6 +3,7 @@ require('dotenv').config();
 // Accesar variables del .env como
 // process.env.<VARNAME>
 
+const mongoose = require("mongoose");
 const createError = require('http-errors');
 const express = require('express');
 const morgan = require('morgan');
@@ -21,6 +22,27 @@ const routes = require("./config/routes.config");
 app.use("/",routes);
 
 // Error handling
+app.use((error,req, res, next)=>{
+
+    if (error instanceof mongoose.Error.ValidationError){
+        error=createError(400, error);
+    }
+    console.error(error)
+    const data= {};
+    data.message= error.message;
+
+    if (error.errors) {
+        data.errors = Object.keys(error.errors).reduce(
+            (errors,key) =>({
+                ...errors,
+                [key]: error.errors[key]?.message || error.errors(key),
+            }),
+            {}
+        );
+    }
+
+    res.status(error.status).json(data);
+})
 
 const port = process.env.PORT || 8000;
 
