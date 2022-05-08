@@ -1,6 +1,8 @@
 const User = require('../models/user.model');
 const createError = require("http-errors");
 const jwt = require('jsonwebtoken');
+const {sendValidationEmail} = require('../config/nodemailer.config');
+const path = require('path');
 
 module.exports.list = (req,res,next) =>{
     User.find()
@@ -27,6 +29,7 @@ module.exports.create = (req,res,next) =>{
     const data = ({name,email,password,bio,active} = req.body);
     User.create(data)
     .then(user => {
+        sendValidationEmail(user);
         res.status(201).json(user);
     })
     .catch(next);
@@ -80,6 +83,17 @@ module.exports.login = (req,res,next) =>{
         }else{
             next(createError(401,"invalid credentials"));
         }
+    }
+    )
+    .catch(next);
+}
+
+// Actividad Semana 04 //
+
+module.exports.validate = (req,res,next) =>{
+    User.findByIdAndUpdate(req.params.id, {validate:true})
+    .then( (user) =>{
+        res.sendFile(path.join(__dirname + '/../public/verified.html'));
     }
     )
     .catch(next);

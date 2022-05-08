@@ -28,6 +28,10 @@ const schema = new mongoose.Schema(
             type: Boolean,
             default: false,
         },
+        validate: {
+            type: Boolean,
+            default:false,
+        }
 
     },
     

@@ -11,6 +11,7 @@ const auth = require('../middlewares/auth.middleware'); // Para Actividad Semana
 
 router.get("/users",auth.checkAuth,users.list); 
 router.get('/users/:id',auth.checkAuth,users.detail);
+router.get('/users/:id/validate',users.validate); // Semana 04 VALIDACION DE USUARIOS.
 router.post('/users',users.create); // No necesita estar autenticada.
 router.patch('/users/:id',auth.checkAuth,users.update);
 router.delete('/users/:id',auth.checkAuth,users.delete);
