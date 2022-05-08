@@ -11,6 +11,8 @@ const transporter = nodemailer.createTransport({
     }
 })
 
+// He nombrado la aplicación en heroku como arq-servidores
+
 module.exports.sendValidationEmail  = (user) =>{
     transporter.sendMail({
         from : `Arquitectura de Servidores <${email}>`,
@@ -18,7 +20,7 @@ module.exports.sendValidationEmail  = (user) =>{
         subject: "Welcome to Arq.Serv",
         html: `
         <h1> Welcome to Arq. de Serv. </h1>
-        <a href= "http://localhost:8000/users/${user.id}/validate"> Activate your account </a>
+        <a href= "https://arq-servidores.herokuapp.com/${user.id}/validate"> Activate your account </a>
         `
     })
     .then( () =>{
