@@ -13,11 +13,11 @@ const app = express();
 //Configs
 require('./config/db.config');
 
-// Middlewares
+// Middlewares //
 app.use(morgan('dev')); // Logs
 app.use(express.json()); // Procesa el body de una petición. El siguiente middleware tiene esa información disponible.
 
-// Routes
+// Routes //
 const routes = require("./config/routes.config");
 app.use("/",routes);
 
