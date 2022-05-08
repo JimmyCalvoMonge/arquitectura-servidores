@@ -19,7 +19,7 @@ module.exports.checkAuth = async (req,res,next) => {
             req.user=user;
             next();
         } else {
-            res.status(401).json({message:"unauthorized"});
+            res.status(401).json({message:"user doesn't exist or invalidated / bad token."});
         }
 
     } catch (err) {
