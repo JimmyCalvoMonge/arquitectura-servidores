@@ -5,7 +5,7 @@ const schema = new mongoose.Schema(
     
     {
         author : {
-            type: mongoose.Types.ObjectId,
+            type: String,
             ref: "User",
         },
         title : {

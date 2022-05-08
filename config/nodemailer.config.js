@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
     }
 })
 
-// He nombrado la aplicación en heroku como arq-servidores
+// He nombrado la aplicación en heroku como arq-serv-jimmy
 
 module.exports.sendValidationEmail  = (user) =>{
     transporter.sendMail({
@@ -20,7 +20,7 @@ module.exports.sendValidationEmail  = (user) =>{
         subject: "Welcome to Arq.Serv",
         html: `
         <h1> Welcome to Arq. de Serv. </h1>
-        <a href= "https://arq-servidores.herokuapp.com/${user.id}/validate"> Activate your account </a>
+        <a href= "https://arq-serv-jimmy.herokuapp.com/${user.id}/validate"> Activate your account </a>
         `
     })
     .then( () =>{
