@@ -16,9 +16,17 @@ const transporter = nodemailer.createTransport({
     }
 })
 
+
+
 // He nombrado la aplicación en heroku como arq-serv-jimmy
 
 module.exports.sendValidationEmail  = (user) =>{
+
+    console.log("EMAIL CREDENTIALS");
+    console.log(process.env.EMAIL);
+    console.log(process.env.EMAIL_PASS);
+    console.log("================");
+
     transporter.sendMail({
         from : `Arquitectura de Servidores <${email}>`,
         to: user.email,
