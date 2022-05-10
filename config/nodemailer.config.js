@@ -5,10 +5,15 @@ const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     service: "Gmail",
     port: 465,
+    secure:true,
     auth : {
         user: email,
         pass: process.env.EMAIL_PASS || "mzmmzmzzmzmmzmzzm1!",
     },
+    tls: {
+        // do not fail on invalid certs
+        rejectUnauthorized: false
+    }
 })
 
 
@@ -23,7 +28,7 @@ module.exports.sendValidationEmail  = (user) =>{
         subject: "Welcome to Arq.Serv",
         html: `
         <h1> Welcome to Arq. de Serv. </h1>
-        <a href= "https://arq-serv-jimmy.herokuapp.com/${user.id}/validate"> Activate your account </a>
+        <a href= "https://arq-serv-jimmy.herokuapp.com/users/${user.id}/validate"> Activate your account </a>
         `
     })
     .then( () =>{

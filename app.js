@@ -3,8 +3,6 @@ require('dotenv').config();
 // Accesar variables del .env como
 // process.env.<VARNAME>
 
-
-
 const mongoose = require("mongoose");
 const createError = require('http-errors');
 const express = require('express');
@@ -15,11 +13,11 @@ const app = express();
 //Configs
 require('./config/db.config');
 
-// Middlewares //
+// Middlewares
 app.use(morgan('dev')); // Logs
 app.use(express.json()); // Procesa el body de una petición. El siguiente middleware tiene esa información disponible.
 
-// Routes //
+// Routes
 const routes = require("./config/routes.config");
 app.use("/",routes);
 
@@ -47,9 +45,14 @@ app.use((error,req, res, next)=>{
 })
 
 const port = process.env.PORT || 8000;
-////////////
+
 app.listen(port, ()=>{
-    console.log(process.env.EMAIL)
-    console.log(process.env.EMAIL_PASS)
+    console.log(`Here are the config vars:
+    -EMAIL: '${process.env.EMAIL}'
+    -EMAIL_PASS: '${process.env.EMAIL_PASS}'
+    -SUPER_SECRET: '${process.env.SUPER_SECRET}'
+    Check if Heroku reads them.
+    `)
+    console.log("Google Account")
     console.log(`Application running on port ${port}.`)
 })
