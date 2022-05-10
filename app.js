@@ -3,6 +3,8 @@ require('dotenv').config();
 // Accesar variables del .env como
 // process.env.<VARNAME>
 
+
+
 const mongoose = require("mongoose");
 const createError = require('http-errors');
 const express = require('express');
@@ -47,5 +49,7 @@ app.use((error,req, res, next)=>{
 const port = process.env.PORT || 8000;
 
 app.listen(port, ()=>{
+    console.log(process.env.EMAIL)
+    console.log(process.env.EMAIL_PASS)
     console.log(`Application running on port ${port}.`)
 })
